@@ -26,6 +26,7 @@ export const useAuthentication = () => {
     }
   };
 
+  // register
   // Função assíncrona para criar um novo usuário com e-mail e senha
 const createUser = async (data) => {
     // Verifica se a operação foi cancelada antes de continuar (boa prática para evitar ações desnecessárias)
@@ -69,8 +70,14 @@ const createUser = async (data) => {
         setLoading(false)
         setError(systemErrorMessage)
     }
-
   };
+  //logout - sing out
+  const logout = () => {
+    checkIfIsCancelled()
+
+    signOut(auth)
+  }
+
   
   // Efeito colateral que executa apenas uma vez ao montar o componente
   useEffect(() => {
@@ -83,6 +90,7 @@ const createUser = async (data) => {
     auth,        // instância do Firebase Auth
     createUser,  // função de criar usuário
     error,       // estado de erro (assumido que foi definido fora desse trecho)
-    loading,     // estado de carregamento
+    loading,     // estado de carregamento.
+    logout
   };
 }  

@@ -47,7 +47,7 @@ const Register = () => {
       <p>Crie seu usuário compartilhe suas histórias</p>
       <form onSubmit={handleSubmit}>
         <label>
-          <span>Nome</span>
+          <span>Nome:</span>
           <input
             type="text"
             name="displayName"
@@ -58,7 +58,7 @@ const Register = () => {
           />
         </label>
         <label>
-          <span>E-mail</span>
+          <span>E-mail:</span>
           <input
             type="text"
             name="email"
@@ -69,7 +69,7 @@ const Register = () => {
           />
         </label>
         <label>
-          <span>Senha</span>
+          <span>Senha:</span>
           <input
             type="password"
             name="password"
