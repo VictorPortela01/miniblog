@@ -1,4 +1,4 @@
-import { useAuthentication } from "../../components/hooks/useAuthentication";
+import { useAuthentication } from "../../hooks/useAuthentication";
 import { useState, useEffect } from "react";
 
 import styles from "./Register.module.css";

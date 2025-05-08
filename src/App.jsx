@@ -3,12 +3,12 @@ import { onAuthStateChanged } from "firebase/auth";
 
 //hooks
 import { useState, useEffect } from "react";
-import { useAuthentication } from "./components/hooks/useAuthentication";
+import { useAuthentication } from "./hooks/useAuthentication";
 
 import "./App.css";
 
 // context
-import { AuthProvider } from "./components/context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 
 // Pages
 import Home from "./pages/Home/Home";
