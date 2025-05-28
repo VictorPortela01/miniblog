@@ -1,5 +1,3 @@
-import { db } from "../firebase/config";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,7 +7,6 @@ import {
 } from "firebase/auth";
 
 import { useState, useEffect } from "react";
-
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -34,7 +31,6 @@ export const useAuthentication = () => {
     checkIfIsCancelled();
     // Ativa o estado de carregamento (loading) para informar que algo está em andamento
     setLoading(true);
-    setError(null);
 
     try {
       // Tenta criar o usuário usando Firebase Auth com e-mail e senha
@@ -48,28 +44,26 @@ export const useAuthentication = () => {
         displayName: data.displayName,
       });
 
-      setLoading(false);
-
       // Retorna o usuário criado com sucesso
       return user;
     } catch (error) {
-      // Caso ocorra algum erro, exibe a mensagem no console
       console.log(error.message);
-      console.log(typeof error.message); // mostra o tipo do erro (string, geralmente)
+      console.log(typeof error.message);
 
       let systemErrorMessage;
 
       if (error.message.includes("Password")) {
-        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres";
+        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
       } else if (error.message.includes("email-already")) {
         systemErrorMessage = "E-mail já cadastrado.";
       } else {
-        systemErrorMessage = "Ocorreu erro, por favor tente mais tarde.";
+        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
       }
 
-      setLoading(false);
       setError(systemErrorMessage);
     }
+
+    setLoading(false);
   };
   //logout - sing out
   const logout = () => {
@@ -86,23 +80,30 @@ export const useAuthentication = () => {
     setError(false);
 
     try {
-
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setLoading(false);
-
     } catch (error) {
+      console.log(error.message);
+      console.log(typeof error.message);
+      console.log(error.message.includes("user-not"));
+
       let systemErrorMessage;
 
       if (error.message.includes("user-not-found")) {
         systemErrorMessage = "Usuário não encontrado.";
       } else if (error.message.includes("wrong-password")) {
-        systemErrorMessage = "Senha incorreta"
+        systemErrorMessage = "Senha incorreta.";
       } else {
-        systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde"
+        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
       }
+
+      console.log(systemErrorMessage);
+
       setError(systemErrorMessage);
-      setLoading(false);
     }
+
+    console.log(error);
+
+    setLoading(false);
   };
 
   // Efeito colateral que executa apenas uma vez ao montar o componente
@@ -118,6 +119,6 @@ export const useAuthentication = () => {
     error, // estado de erro (assumido que foi definido fora desse trecho)
     loading, // estado de carregamento.
     logout,
-    login
+    login,
   };
 };

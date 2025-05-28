@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
-import { colletion, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 // Estado inicial do reducer: sem carregamento e sem erro
 const initialState = {
@@ -25,51 +25,37 @@ const insertReducer = (state, action) => {
   }
 };
 
-// Hook customizado para inserir documentos em uma coleção do Firebase
 export const useInsertDocument = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
-  // Variável para evitar vazamento de memória ao desmontar o componente
+  // deal with memory leak
   const [cancelled, setCancelled] = useState(false);
 
-  // Só despacha ações se o componente ainda estiver montado
   const checkCancelBeforeDispatch = (action) => {
     if (!cancelled) {
       dispatch(action);
     }
   };
 
-  // Função assíncrona para inserir um documento
   const insertDocument = async (document) => {
-    // Dispara estado de carregamento
-    checkCancelBeforeDispatch({
-      type: "LOADING",
-    });
+    checkCancelBeforeDispatch({ type: "LOADING" });
 
     try {
-      // Adiciona um timestamp ao documento
-      const newDocument = { ...document, createAt: Timestamp.now };
+      const newDocument = { ...document, createdAt: Timestamp.now() };
 
-      // Tenta adicionar o documento na coleção do Firebase
       const insertedDocument = await addDoc(
         collection(db, docCollection),
         newDocument
       );
 
-      // Dispara ação de sucesso
       checkCancelBeforeDispatch({
         type: "INSERTED_DOC",
         payload: insertedDocument,
       });
     } catch (error) {
-      // Dispara ação de erro com a mensagem retornada
-      checkCancelBeforeDispatch({
-        type: "ERROR",
-        payload: error.message,
-      });
+      checkCancelBeforeDispatch({ type: "ERROR", payload: error.message });
     }
   };
-
   // Marca como cancelado se o componente for desmontado (previne vazamento de memória)
   useEffect(() => {
     return () => setCancelled(true);
