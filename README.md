@@ -1,12 +1,57 @@
-# React + Vite
+# MiniBlog 📚🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto pessoal criado durante meus estudos de **React** e **Firebase**.  
+A ideia foi construir um blog simples (“mini”) onde usuários podem se cadastrar, escrever posts com tags, pesquisar conteúdo e gerenciar suas próprias publicações. O foco principal foi praticar **React Router DOM v7**, **Context API**, hooks customizados, integração com o **Firebase Authentication** e com o **Cloud Firestore**.
 
-Currently, two official plugins are available:
+> **Status**: em aprendizado – funcionalidades principais concluídas, mas sempre aberto a melhorias.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Funcionalidade | Descrição rápida |
+| -------------- | ---------------- |
+| **Cadastro / Login** | Autenticação de e-mail/senha via Firebase. |
+| **Criar post** | Editor simples com título, imagem (URL), conteúdo e tags separadas por vírgula. |
+| **Feed** | Lista de todos os posts em ordem cronológica (mais recente primeiro). |
+| **Pesquisar** | Busca por tags (case-insensitive). |
+| **Dashboard** | Área do usuário mostrando seus posts, com opções de editar ou excluir. |
+| **Roteamento protegido** | Bloqueia rotas de criação/edição para quem não estiver logado. |
+| **Responsividade** | Layout adaptável a desktop e mobile. |
+
+---
+
+## 🧑‍💻 Principais aprendizados
+
+* **React Router DOM v7** – rotas aninhadas, navegação programática e `Navigate`.
+* **Context API** – compartilhando o objeto `user` globalmente.
+* **Hooks customizados** (`useAuthentication`, `useFetchDocuments`, etc.) para isolar lógica de Firebase. :contentReference[oaicite:0]{index=0}
+* **Firebase v11** – Auth + Firestore com métodos assíncronos e listeners em tempo real.
+* Boas práticas de **eslint** e projeto iniciado com **Vite** para HMR rápido. :contentReference[oaicite:1]{index=1}
+
+---
+
+## 🛠️ Stack & dependências
+
+| Categoria | Pacotes / serviços |
+|-----------|--------------------|
+| Front-end | `react@19`, `react-dom@19`, `vite@6` |
+| Roteamento | `react-router-dom@7` |
+| Backend-as-a-Service | `firebase@11` (Auth + Firestore) |
+| Lint | `eslint`, `@eslint/js`, `eslint-plugin-react-hooks` |
+| Deploy sugerido | Vercel, Netlify ou Firebase Hosting |
+
+---
+
+## 📂 Estrutura (resumida)
+src/
+├─ assets/ # imagens e ícones
+├─ components/ # Navbar, Footer, Button, etc.
+├─ context/ # AuthContext.jsx
+├─ hooks/ # lógica reutilizável (Firebase, fetch, auth)
+├─ pages/ # Home, About, Login, Register, ...
+│ └─ .../styles.css # estilos locais
+├─ App.jsx # rotas e providers
+└─ main.jsx # ponto de entrada React/Vite
+---
+
