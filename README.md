@@ -45,13 +45,13 @@ A ideia foi construir um blog simples (“mini”) onde usuários podem se cadas
 
 ## 📂 Estrutura (resumida)
 src/
-├─ assets/ # imagens e ícones
-├─ components/ # Navbar, Footer, Button, etc.
-├─ context/ # AuthContext.jsx
-├─ hooks/ # lógica reutilizável (Firebase, fetch, auth)
-├─ pages/ # Home, About, Login, Register, ...
-│ └─ .../styles.css # estilos locais
-├─ App.jsx # rotas e providers
-└─ main.jsx # ponto de entrada React/Vite
----
+├─ assets/ # imagens e ícones <br>
+├─ components/ # Navbar, Footer, Button, etc. <br>
+├─ context/ # AuthContext.jsx <br>
+├─ hooks/ # lógica reutilizável (Firebase, fetch, auth) <br>
+├─ pages/ # Home, About, Login, Register, ... <br>
+│ └─ .../styles.css # estilos locais <br>
+├─ App.jsx # rotas e providers <br>
+└─ main.jsx # ponto de entrada React/Vite <br>
+--- 
 
